@@ -27,7 +27,7 @@ void TaskManager::addTask() {
     std::cout << "Inserisci descrizione del nuovo task: ";
     std::cin.ignore();
     std::getline(std::cin, desc);
-    std::cout << "Inserisci priorità del nuovo task: ";
+    std::cout << "Inserisci priorità del nuovo task (1,2,...): ";
     std::cin >> priority;
     std::cout << "Inserisci scadenza del nuovo task (YYYY-MM-DD): ";
     std::cin >> deadline;
