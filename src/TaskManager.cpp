@@ -93,3 +93,26 @@ void TaskManager::listTasks() {
                   << "Categoria: " << t.getCategory() << "\n";
     }
 }
+
+const std::vector<Task>& TaskManager::getTasks() const {
+    return tasks;
+}
+
+Task* TaskManager::getTaskById(int id) {
+    for (auto &task : tasks) {
+        if (task.getId() == id) {
+            return &task;
+        }
+    }
+    return nullptr;
+}
+
+bool TaskManager::removeTaskById(int id) {
+    for (size_t i = 0; i < tasks.size(); i++) {
+        if (tasks[i].getId() == id) {
+            tasks.erase(tasks.begin() + i);
+            return true;
+        }
+    }
+    return false;
+}

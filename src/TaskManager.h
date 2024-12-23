@@ -14,4 +14,8 @@ public:
     void modifyTask();
     void removeTask();
     void listTasks();
+
+    const std::vector<Task>& getTasks() const;
+    Task* getTaskById(int id);
+    bool removeTaskById(int id);
 };
