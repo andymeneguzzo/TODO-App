@@ -1,11 +1,6 @@
 #include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
 #include "Task.h"
 #include "TaskManager.h"
-
-static std::vector<Task> tasks;
 
 int main() {
     TaskManager manager;
