@@ -1,3 +1,5 @@
+// TaskManager.h
+
 #ifndef TASK_MANAGER_H
 #define TASK_MANAGER_H
 
@@ -16,10 +18,13 @@ public:
     void deleteTask();
     void listTasks();
     void backupTasks();
+    void markTaskCompleted(); // Nuovo metodo per segnare un task come completato
 
 private:
     DatabaseManager& m_dbManager;
     CSVBackup& m_csvBackup;
+
+    bool validateDateTime(const std::string& dateTimeStr, std::time_t& outTime); // Nuovo metodo di validazione
 };
 
 #endif // TASK_MANAGER_H

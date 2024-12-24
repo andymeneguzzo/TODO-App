@@ -32,7 +32,8 @@ int main() {
         std::cout << "3. Elimina Task\n";
         std::cout << "4. Visualizza Task\n";
         std::cout << "5. Esegui Backup CSV\n";
-        std::cout << "6. Esci\n";
+        std::cout << "6. Segna Task come completato";
+        std::cout << "7. Esci\n";
         std::cout << "Seleziona un'operazione: ";
 
         int choice;
@@ -58,6 +59,9 @@ int main() {
                 taskManager.backupTasks();
                 break;
             case 6:
+                taskManager.markTaskCompleted();
+                break;
+            case 7:
                 std::cout << "Uscita...\n";
                 dbManager.close();
                 return 0;
