@@ -8,10 +8,11 @@
 #include "Task.h"
 #include "DatabaseManager.h"
 #include "CSVBackup.h"
+#include "UIManager.h"
 
 class TaskManager {
 public:
-    TaskManager(DatabaseManager& dbManager, CSVBackup& csvBackup);
+    TaskManager(DatabaseManager& dbManager, CSVBackup& csvBackup, UIManager& uiManager);
 
     void addTask();
     void editTask();
@@ -23,8 +24,9 @@ public:
 private:
     DatabaseManager& m_dbManager;
     CSVBackup& m_csvBackup;
+    UIManager& m_uiManager;
 
-    bool validateDateTime(const std::string& dateTimeStr, std::time_t& outTime); // Nuovo metodo di validazione
+    // bool validateDateTime(const std::string& dateTimeStr, std::time_t& outTime); // Nuovo metodo di validazione
 };
 
 #endif // TASK_MANAGER_H

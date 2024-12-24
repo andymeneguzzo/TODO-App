@@ -17,16 +17,19 @@ bool CSVBackup::backupTasks(const std::vector<Task>& tasks) {
         return false;
     }
 
-    // Intestazione CSV (facoltativa)
+    // Intestazione CSV
     file << "id,title,description,due_date,priority,completed\n";
 
     for (const auto& task : tasks) {
-        // Sostituiamo eventuali virgole nelle stringhe
+        // Sostituzione di eventuali virgole nelle stringhe
         std::string safeTitle = task.getTitle();
         std::replace(safeTitle.begin(), safeTitle.end(), ',', ' ');
-        
+
         std::string safeDesc = task.getDescription();
         std::replace(safeDesc.begin(), safeDesc.end(), ',', ' ');
+
+        // Convertiamo la priorità in intero
+        int priorityInt = static_cast<int>(task.getPriority());
 
         // Convertiamo la data/ora in formato timestamp
         std::time_t dueDate = task.getDueDate();
@@ -35,13 +38,14 @@ bool CSVBackup::backupTasks(const std::vector<Task>& tasks) {
              << safeTitle << ","
              << safeDesc << ","
              << dueDate << ","
-             << task.getPriority() << ","
+             << priorityInt << ","
              << (task.isCompleted() ? "1" : "0") << "\n";
     }
 
     file.close();
     return true;
 }
+
 
 
 std::vector<Task> CSVBackup::loadTasks() {
@@ -56,9 +60,8 @@ std::vector<Task> CSVBackup::loadTasks() {
     std::string line;
     // Saltiamo l'intestazione
     if (std::getline(file, line)) {
-        // Verifica se la riga contiene la parola "id"
         if (line.find("id") == std::string::npos) {
-            // Se non è veramente un header, allora la reinseriamo nel buffer
+            // Se non è un'intestazione, reinseriamo la riga nel buffer
             file.seekg(0);
         }
     }
@@ -76,7 +79,23 @@ std::vector<Task> CSVBackup::loadTasks() {
         {
             int id = std::stoi(idStr);
             std::time_t dueDate = static_cast<std::time_t>(std::stoll(dueDateStr));
-            int priority = std::stoi(priorityStr);
+            int priorityInt = std::stoi(priorityStr);
+            Priority priority = Priority::Medium; // Default
+
+            switch (priorityInt) {
+                case 1:
+                    priority = Priority::High;
+                    break;
+                case 2:
+                    priority = Priority::Medium;
+                    break;
+                case 3:
+                    priority = Priority::Low;
+                    break;
+                default:
+                    priority = Priority::Medium;
+            }
+
             bool completed = (completedStr == "1");
 
             tasks.emplace_back(id, title, description, dueDate, priority, completed);

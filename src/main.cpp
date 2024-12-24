@@ -1,8 +1,8 @@
 #include <iostream>
-#include <limits>
 #include "TaskManager.h"
 #include "DatabaseManager.h"
 #include "CSVBackup.h"
+#include "UIManager.h"
 
 int main() {
     // Percorso del database SQLite
@@ -23,24 +23,16 @@ int main() {
     }
 
     CSVBackup csvBackup(csvPath);
-    TaskManager taskManager(dbManager, csvBackup);
+    UIManager uiManager;
+    TaskManager taskManager(dbManager, csvBackup, uiManager);
+
+    // Visualizza i task all'avvio
+    std::cout << "\n--- Stato Attuale dei Task ---\n";
+    taskManager.listTasks();
 
     while (true) {
-        std::cout << "\n--- To-Do List App ---\n";
-        std::cout << "1. Aggiungi Task\n";
-        std::cout << "2. Modifica Task\n";
-        std::cout << "3. Elimina Task\n";
-        std::cout << "4. Visualizza Task\n";
-        std::cout << "5. Esegui Backup CSV\n";
-        std::cout << "6. Segna Task come completato";
-        std::cout << "7. Esci\n";
-        std::cout << "Seleziona un'operazione: ";
-
-        int choice;
-        std::cin >> choice;
-
-        // Pulisce il buffer d'ingresso per le chiamate getline()
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        uiManager.displayMenu();
+        int choice = uiManager.getUserChoice();
 
         switch (choice) {
             case 1:
@@ -63,14 +55,11 @@ int main() {
                 break;
             case 7:
                 std::cout << "Uscita...\n";
-                dbManager.close();
                 return 0;
             default:
-                std::cout << "Scelta non valida, riprovare.\n";
+                uiManager.displayError("Scelta non valida, riprovare.");
         }
     }
 
-    // Chiudiamo il database prima di terminare
-    dbManager.close();
     return 0;
 }

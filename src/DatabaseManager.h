@@ -3,10 +3,18 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include "Task.h"
-
-// Per la gestione diretta di SQLite
 #include <sqlite3.h>
+
+// Deleter personalizzato per sqlite3*
+struct SQLiteDeleter {
+    void operator()(sqlite3* db) const {
+        if (db) {
+            sqlite3_close(db);
+        }
+    }
+};
 
 class DatabaseManager {
 public:
@@ -14,8 +22,6 @@ public:
     ~DatabaseManager();
 
     bool open();
-    void close();
-
     bool createTable();
     bool addTask(const Task& task);
     bool updateTask(const Task& task);
@@ -24,7 +30,7 @@ public:
 
 private:
     std::string m_dbPath;
-    sqlite3* m_db;
+    std::unique_ptr<sqlite3, SQLiteDeleter> m_db;
 };
 
 #endif // DATABASE_MANAGER_H
