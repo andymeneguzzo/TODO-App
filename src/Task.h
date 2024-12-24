@@ -4,11 +4,18 @@
 #include <string>
 #include <ctime>
 
+// Enumerazione per la priorità
+enum class Priority {
+    High = 1,
+    Medium = 2,
+    Low = 3
+};
+
 class Task {
 public:
     Task();
     Task(int id, const std::string& title, const std::string& description,
-         const std::time_t dueDate, int priority, bool completed);
+         std::time_t dueDate, Priority priority, bool completed);
 
     int getId() const;
     void setId(int id);
@@ -22,8 +29,8 @@ public:
     std::time_t getDueDate() const;
     void setDueDate(const std::time_t dueDate);
 
-    int getPriority() const;
-    void setPriority(int priority);
+    Priority getPriority() const;
+    void setPriority(Priority priority);
 
     bool isCompleted() const;
     void setCompleted(bool completed);
@@ -34,7 +41,7 @@ private:
     std::string m_title;
     std::string m_description;
     std::time_t m_dueDate;
-    int m_priority;
+    Priority m_priority;
     bool m_completed;
 };
 

@@ -2,14 +2,14 @@
 
 Task::Task()
     : m_id(-1), m_title(""), m_description(""),
-      m_dueDate(0), m_priority(1), m_completed(false)
+      m_dueDate(0), m_priority(Priority::Medium), m_completed(false)
 {
 }
 
 Task::Task(int id, const std::string& title, const std::string& description,
-           const std::time_t dueDate, int priority, bool completed)
+           std::time_t dueDate, Priority priority, bool completed)
     : m_id(id), m_title(title), m_description(description),
-      m_dueDate(dueDate), m_priority(priority), m_completed(completed) 
+      m_dueDate(dueDate), m_priority(priority), m_completed(completed)
 {
 }
 
@@ -45,11 +45,11 @@ void Task::setDueDate(const std::time_t dueDate) {
     m_dueDate = dueDate;
 }
 
-int Task::getPriority() const {
+Priority Task::getPriority() const {
     return m_priority;
 }
 
-void Task::setPriority(int priority) {
+void Task::setPriority(Priority priority) {
     m_priority = priority;
 }
 
