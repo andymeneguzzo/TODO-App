@@ -1,2 +1,0 @@
-# Hashes of file build rules.
-ad1aee25186e2eb9c07fe9d07ce42e28 ui_mainwindow.h
