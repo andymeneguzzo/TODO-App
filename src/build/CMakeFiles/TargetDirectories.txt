@@ -1,0 +1,3 @@
+/Users/andy.drumbeat/Desktop/SOFTWARE/PROJECTS/C++ projects/GITHUB repos/TODO_App/TODO-App/src/build/CMakeFiles/TODOApp.dir
+/Users/andy.drumbeat/Desktop/SOFTWARE/PROJECTS/C++ projects/GITHUB repos/TODO_App/TODO-App/src/build/CMakeFiles/edit_cache.dir
+/Users/andy.drumbeat/Desktop/SOFTWARE/PROJECTS/C++ projects/GITHUB repos/TODO_App/TODO-App/src/build/CMakeFiles/rebuild_cache.dir
