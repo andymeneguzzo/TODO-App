@@ -1,3 +1,7 @@
+/**
+ * Codebase compiles, but has errors in the DatabaseManager class. Cannot create or manipulate tasks correctly.
+ */
+
 #include <iostream>
 #include "TaskManager.h"
 #include "DatabaseManager.h"
