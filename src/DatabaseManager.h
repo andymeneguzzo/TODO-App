@@ -21,6 +21,8 @@ public:
     DatabaseManager(const std::string& dbPath);
     ~DatabaseManager();
 
+    bool isOpen() const;
+    bool migrateSchema();
     bool open();
     bool createTable();
     bool addTask(const Task& task);

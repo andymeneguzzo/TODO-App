@@ -1,7 +1,3 @@
-/**
- * Codebase compiles, but has errors in the DatabaseManager class. Cannot create or manipulate tasks correctly.
- */
-
 #include <iostream>
 #include "TaskManager.h"
 #include "DatabaseManager.h"
@@ -23,6 +19,12 @@ int main() {
     // Creiamo la tabella se non esiste
     if (!dbManager.createTable()) {
         std::cerr << "Impossibile creare o verificare la tabella. Uscita...\n";
+        return 1;
+    }
+
+    // Migrazione dello schema (aggiunta della colonna due_date se manca)
+    if (!dbManager.migrateSchema()) {
+        std::cerr << "Errore nella migrazione dello schema. Uscita...\n";
         return 1;
     }
 
